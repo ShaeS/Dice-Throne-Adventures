@@ -1,6 +1,9 @@
+import GameTiles from '../../decks/tiles'
+import GameMonsters from '../../decks/monsters'
+
 const initialState = {
-    monsters: [],
-    tiles: []
+    monsters: GameMonsters,
+    tiles: GameTiles
 }
 
 export default {

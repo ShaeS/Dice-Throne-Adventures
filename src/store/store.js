@@ -7,7 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    bossCP: 10
+    bossCP: 10,
+    gold: 0
   },
   mutations: {
 
