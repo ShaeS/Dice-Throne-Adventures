@@ -1,18 +1,18 @@
 <template>
     <div class="game-tile">
-        <h3 class="game-tile__title">{{ title }}</h3>
-        <p class="game-tile__description">{{ description }}</p>
+        <h3 class="game-tile__title">{{ tile.title }}</h3>
+        <p class="game-tile__description">{{ tile.description }}</p>
 
         <div class="game-tile__enemy">
             <span>Enemy:</span>
-            <EnemyIcon class="enemy-icon" :type="enemyType" />
+            <EnemyIcon class="enemy-icon" :type="tile.enemyType" />
         </div>
         <div class="game-tile__boss-cp">
             <span>Boss:</span>
-            <CPIcon class="cp-icon" :amount="bossCP" />
+            <CPIcon class="cp-icon" :amount="tile.bossCP" />
         </div>
         <div class="game-tile__gold">
-            <GoldIcon class="gold-icon" :amount="gold" />
+            <GoldIcon class="gold-icon" :amount="tile.gold" />
         </div>
     </div>
 </template>
@@ -29,11 +29,7 @@ export default {
     EnemyIcon,
   },
   props: {
-    title: String,
-    bossCP: Number,
-    gold: Number,
-    enemyType: Number,
-    description: String,
+    tile: Object,
   },
 };
 </script>
@@ -76,6 +72,7 @@ export default {
         width: 40px;
         z-index: 1;
         position: relative;
+        margin-right: var(--spacing-xs);
     }
 
     &__enemy {
