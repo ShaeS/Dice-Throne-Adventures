@@ -1,5 +1,6 @@
 export default [
   {
+    level: 1,
     title: 'Vault I',
     playerCP: 1,
     gold: 0,
@@ -8,11 +9,30 @@ export default [
     description: 'Gain green loot, Alternatively roll 1 die. On 1-3, gain nothing. On 4-6 gain blue chest.',
   },
   {
+    level: 1,
     title: 'Lonely Tower I',
     playerCP: 0,
     gold: 0,
     bossCP: 2,
     enemyType: 1,
     description: 'You may play an upgrade card from your hand that costs 2CP or less for free.',
+  },
+  {
+    level: 2,
+    title: 'Scorched Mesa II',
+    playerCP: 0,
+    gold: 2,
+    bossCP: 2,
+    enemyType: 2,
+    description: 'Recieve 2 Dmg.',
+  },
+  {
+    level: 1,
+    title: 'Mirage I',
+    playerCP: 0,
+    gold: 0,
+    bossCP: 1,
+    enemyType: false,
+    description: 'Roll 1 die: On 1-2 gain concussion. On 3-4, spawn a level 1 monster. On 5-6, gain 1CP.',
   },
 ];
