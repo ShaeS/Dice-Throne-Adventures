@@ -1,16 +1,43 @@
 <template>
   <div id="app">
-    <GameBoard />
+    <div ref="board" class="board-wrap">
+      <GameBoard />
+      <PieceTrack />
+    </div>
+    <GamePlayer />
   </div>
 </template>
 
 <script>
+import panzoom from 'panzoom';
+import { mapActions } from 'vuex';
+
+import PieceTrack from './components/PieceTrack.vue';
 import GameBoard from './components/GameBoard.vue';
+import GamePlayer from './components/GamePlayer.vue';
 
 export default {
   name: 'app',
   components: {
+    PieceTrack,
     GameBoard,
+    GamePlayer,
+  },
+  mounted() {
+    panzoom(this.$refs.board, {
+      zoomSpeed: 0.1,
+      maxZoom: 1.5,
+      minZoom: 0.25,
+      zoomDoubleClickSpeed: 1,
+    }).zoomAbs(1000, -2000, 0.75);
+    this.chooseLevel();
+    this.pickTiles();
+  },
+  methods: {
+    ...mapActions([
+      'chooseLevel',
+      'pickTiles',
+    ]),
   },
 };
 </script>
@@ -71,6 +98,7 @@ body {
 }
 
 #app {
+  position: relative;
   height: 100vh;
   padding: var(--spacing-lg);
 }

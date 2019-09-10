@@ -1,6 +1,7 @@
 export default [
   {
     level: 1,
+    bossChance: 3,
     layout: [
       [
         null,

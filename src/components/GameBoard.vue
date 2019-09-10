@@ -1,45 +1,51 @@
 <template>
-    <div ref="board" class="game-board">
-        <div class="row" v-for="row in levelLayout.layout">
-            <component :is="tile ? 'GameTile' : 'div'" v-for="tile in row" :tile="tileDeck[0]" />
-        </div>
+  <div class="game-board" :style="{'grid-template-rows': `repeat(${boardHeight}, 300px)`}">
+    <div
+      class="row"
+      v-for="(row, i) in boardTiles"
+      :key="i"
+      :style="{ 'grid-template-columns': `repeat(${boardWidth}, 300px)`}"
+    >
+      <component :is="tile ? 'GameTile' : 'div'" v-for="(tile, j) in row" :key="j" :tile="tile" />
     </div>
+  </div>
 </template>
 
 <script>
-import panzoom from 'panzoom';
+import { mapGetters } from 'vuex';
 import GameTile from './GameTile.vue';
 
 export default {
   components: {
     GameTile,
   },
-  data() {
-    return {
-      tileDeck: this.$store.state.decks.tiles,
-      levelLayout: this.$store.state.decks.levels[0],
-    };
-  },
-  mounted() {
-    panzoom(this.$refs.board, {
-      zoomSpeed: 0.01,
-      maxZoom: 1.5,
-      minZoom: 0.5,
-    });
+  computed: {
+    boardTiles() {
+      return this.$store.state.boardTiles;
+    },
+    ...mapGetters([
+      'boardWidth',
+      'boardHeight',
+    ]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .game-board {
-    display: grid;
-    grid-template-rows: repeat( 5, 300px );
-    grid-gap: var(--spacing-sm);
+  display: grid;
+  grid-gap: var(--spacing-lg);
 
-    .row {
-        grid-template-columns: repeat( 6, 300px );
-        display: grid;
-        grid-gap: var(--spacing-sm);
-    }
+  .row {
+    display: grid;
+    grid-gap: var(--spacing-lg);
+  }
+}
+
+.player-piece {
+  width: 60px;
+  height: 60px;
+  background: red;
+  position: absolute;
 }
 </style>

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "panzoom": "^8.1.2",
+    "panzoom": "^8.3.0",
     "vue": "^2.6.10",
     "vuex": "^3.0.1"
   },

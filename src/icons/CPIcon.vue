@@ -28,8 +28,10 @@ export default {
             position: absolute;
 
             span {
+                display: inline-block;
                 font-size: 10px;
                 color: rgb(138, 196, 199);
+                margin-bottom: var(--spacing-xxs);
             }
         }
 
