@@ -38,6 +38,13 @@ export default new Vuex.Store({
     playerInfo(state) {
       return state.players[state.activePlayer];
     },
+    playerCurrentTile(state, getters) {
+      const { position } = getters.playerInfo;
+      if (state.boardTile) {
+        return state.boardTiles[position[0]][position[1]];
+      }
+      return [];
+    },
     boardWidth(state) {
       if (state.currentLevel) {
         return state.currentLevel.layout[0].length;
@@ -81,6 +88,10 @@ export default new Vuex.Store({
     setBoardTiles(state, payload) {
       state.boardTiles = payload;
     },
+    revealTile(state) {
+      const { position } = state.players[state.activePlayer];
+      state.boardTiles[position[0]][position[1]].revealed = true;
+    },
   },
   actions: {
     chooseLevel({ state, dispatch, commit }) {
@@ -99,12 +110,12 @@ export default new Vuex.Store({
           }
           let chosen;
           if (tile.boss && bossAttempt < state.currentLevel.bossChance && !choseBoss) {
-            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, null), revealed: true };
+            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, null), revealed: false };
             bossAttempt++;
           } else if (tile.boss && bossAttempt === state.currentLevel.bossChance && !choseBoss) {
-            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, true), revealed: true };
+            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, true), revealed: false };
           } else {
-            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, false), revealed: true };
+            chosen = { ...tile, ...drawCard(state, 'tiles', tile.level, false), revealed: false };
           }
           if (chosen.enemyType === 4) {
             choseBoss = true;

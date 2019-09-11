@@ -26,6 +26,13 @@ export default {
   data() {
     return {};
   },
+  watch: {
+    playerCurrentTile(newVal) {
+      if (!newVal.revealed) {
+        this.$store.commit('revealTile');
+      }
+    },
+  },
   computed: {
     players() {
       return this.$store.state.players;
@@ -33,6 +40,7 @@ export default {
     ...mapGetters([
       'boardWidth',
       'boardHeight',
+      'playerCurrentTile',
     ]),
   },
 };

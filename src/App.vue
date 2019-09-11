@@ -5,6 +5,7 @@
       <PieceTrack />
     </div>
     <GamePlayer />
+    <SidebarInfo />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import { mapActions } from 'vuex';
 import PieceTrack from './components/PieceTrack.vue';
 import GameBoard from './components/GameBoard.vue';
 import GamePlayer from './components/GamePlayer.vue';
+import SidebarInfo from './components/SidebarInfo.vue';
 
 export default {
   name: 'app',
@@ -22,6 +24,7 @@ export default {
     PieceTrack,
     GameBoard,
     GamePlayer,
+    SidebarInfo,
   },
   mounted() {
     panzoom(this.$refs.board, {

@@ -421,13 +421,181 @@ export default [
             description: 'Deal 6 undefendable dmg.',
           },
         ],
-        description: 'Still need to find this text.',
+        description: 'This dmg is dealt to all heroes engaged with Wailing Banshee.',
       },
     ],
     defense: [
       {
         dice: 2,
         description: 'On [6], Ignores all incoming dmg.',
+      },
+    ],
+  },
+  {
+    title: 'Satyr',
+    enemyType: 1,
+    health: 15,
+    CP: 1,
+    rewards: 'green',
+    rollObjective: [[1, 2, 3], [1, 2, 3], [4, 5], [4, 5], [6]],
+    firstStrike: false,
+    attacks: [
+      {
+        title: 'Ram',
+        rolls: [
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [4, 5]],
+            description: 'Deal 4 dmg.',
+          },
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [4, 5], [4, 5]],
+            description: 'Deal 5 dmg.',
+          },
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [4, 5], [4, 5], [6]],
+            description: 'Deal 6 dmg.',
+          },
+        ],
+      },
+    ],
+    defense: [
+      {
+        dice: 3,
+        description: 'On [4, 5], Inflict Knockdown.',
+      },
+    ],
+  },
+  {
+    title: 'Corrupted Rogue',
+    enemyType: 2,
+    health: 14,
+    CP: 5,
+    rewards: 'blue',
+    rollObjective: 'Straights',
+    firstStrike: true,
+    attacks: [
+      {
+        title: 'Cunning Strike',
+        rolls: [
+          {
+            roll: 'small straight',
+            description: 'Deal 1/2 CP as dmg (rounded up).',
+          },
+          {
+            roll: 'large straight',
+            description: 'Deal CP as dmg.',
+          },
+        ],
+      },
+    ],
+    passive: [
+      {
+        description: 'At the start of each turn, gain 2CP. On failed Offensive Roll, gain Sneak Attack.',
+      },
+    ],
+    defense: [
+      {
+        dice: 5,
+        description: 'On [6], [6], ignore all incoming dmg. On any other outcome, steal 1CP',
+      },
+    ],
+  },
+  {
+    title: 'Dark Panther',
+    enemyType: 1,
+    health: 8,
+    CP: 2,
+    rewards: 'green',
+    rollObjective: [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]],
+    firstStrike: true,
+    attacks: [
+      {
+        title: 'Shred',
+        rolls: [
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [1, 2, 3]],
+            description: 'Deal 4 dmg',
+          },
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]],
+            description: 'Deal 5 dmg',
+          },
+          {
+            roll: [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]],
+            description: 'Deal 6 dmg',
+          },
+        ],
+        description: 'On 4-of-a-kind (#\'s), inflict Bleed.',
+      },
+    ],
+    defense: [
+      {
+        dice: 1,
+        description: 'On [1, 2, 3], inflict Bleed.',
+      },
+    ],
+  },
+  {
+    title: 'Chaos Elf',
+    enemyType: 1,
+    health: 13,
+    CP: 1,
+    rewards: 'green',
+    rollObjective: 'straights',
+    firstStrike: false,
+    attacks: [
+      {
+        title: 'Withered Root',
+        rolls: [
+          {
+            roll: 'small straight',
+            description: 'Deal 6 dmg.',
+          },
+          {
+            roll: 'large straight',
+            description: 'Deal 7 dmg.',
+          },
+        ],
+      },
+    ],
+    defense: [
+      {
+        dice: 4,
+        description: 'On [4, 5], [4, 5], prevent 1/2 dmg. (rounded up)',
+      },
+    ],
+  },
+  {
+    title: 'Horned Harpy',
+    enemyType: 2,
+    health: 9,
+    CP: 3,
+    rewards: 'blue',
+    rollObjective: [[4, 5], [4, 5], [4, 5], [4, 5], [4, 5]],
+    firstStrike: false,
+    attacks: [
+      {
+        title: 'Aerial Dive',
+        rolls: [
+          {
+            roll: [[4, 5], [4, 5], [4, 5]],
+            description: 'Deal 3 undefendable dmg.',
+          },
+          {
+            roll: [[4, 5], [4, 5], [4, 5], [4, 5]],
+            description: 'Deal 4 undefendable dmg.',
+          },
+          {
+            roll: [[4, 5], [4, 5], [4, 5], [4, 5], [4, 5]],
+            description: 'Deal 5 undefendable dmg.',
+          },
+        ],
+      },
+    ],
+    defense: [
+      {
+        dice: 3,
+        description: 'On [4, 5], prevent 1/2 incoming dmg. (rounded up). On [4, 5], [4, 5], ignore all incoming dmg.',
       },
     ],
   },
