@@ -6,6 +6,10 @@
     </div>
     <GamePlayer />
     <SidebarInfo />
+
+    <transition name="fade">
+      <portal-target name="modals"></portal-target>
+    </transition>
   </div>
 </template>
 
@@ -52,6 +56,8 @@ export default {
   --color-blue: rgb(114, 161, 197);
   --color-purple: rgb(193, 114, 197);
   --color-yellow: rgb(205, 169, 93);
+
+  --color-success: rgb(60, 162, 65);
 
   /* COLORS -- GREY */
   --color-grey-100: hsl(0, 0%, 97%);
@@ -111,5 +117,89 @@ body {
 *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+.vue-portal-target {
+  position: relative;
+  z-index: 99;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .5s;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+
+.button {
+  display: inline-block;
+  background: var(--color-grey-900);
+  color: var(--color-grey-100);
+  font-weight: bold;
+  border: 0;
+  font-size: 12px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  outline: 0;
+
+  &--large {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  &--success {
+    background: var(--color-success);
+  }
+}
+
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+
+  .tooltip-inner {
+    background: var(--color-grey-1000);
+    color: white;
+    border-radius: 4px;
+    padding: 4px 12px 4px;
+  }
+
+  .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 4px;
+    border-color: var(--color-grey-1000);
+  }
+
+  &[x-placement^="top"] {
+    margin-bottom: 4px;
+
+    .tooltip-arrow {
+      border-width: 4px 4px 0 4px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      bottom: -4px;
+      left: calc(50% - 4px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s, visibility .15s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .15s;
+  }
 }
 </style>

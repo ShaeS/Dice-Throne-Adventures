@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     boardTiles() {
-      return this.$store.state.boardTiles;
+      return this.$store.state.tiles.boardTiles;
     },
     ...mapGetters([
       'boardWidth',

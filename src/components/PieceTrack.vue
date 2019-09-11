@@ -29,13 +29,13 @@ export default {
   watch: {
     playerCurrentTile(newVal) {
       if (!newVal.revealed) {
-        this.$store.commit('revealTile');
+        this.$store.dispatch('revealTile');
       }
     },
   },
   computed: {
     players() {
-      return this.$store.state.players;
+      return this.$store.state.players.players;
     },
     ...mapGetters([
       'boardWidth',
@@ -48,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .piece-track {
+  pointer-events: none;
   position:absolute;
   top: 0;
   right: 0;
@@ -60,6 +61,7 @@ export default {
   grid-gap: var(--spacing-lg);
 
   &__player {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     justify-content: center;

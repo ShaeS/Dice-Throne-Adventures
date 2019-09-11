@@ -1,7 +1,7 @@
 export default [
   {
     title: 'Enthropy Mage',
-    enemyType: 1,
+    level: 1,
     health: 12,
     CP: 2,
     rewards: 'green',
@@ -27,7 +27,7 @@ export default [
   },
   {
     title: 'Lost Swordsman',
-    enemyType: 1,
+    level: 1,
     health: 11,
     CP: 0,
     rewards: 'green',
@@ -57,7 +57,7 @@ export default [
   },
   {
     title: 'Arcane Vibra',
-    enemyType: 2,
+    level: 2,
     health: 10,
     CP: 3,
     rewards: 'blue',
@@ -97,7 +97,7 @@ export default [
   },
   {
     title: 'Brutish Cyclops',
-    enemyType: 1,
+    level: 1,
     health: 13,
     CP: 2,
     rewards: 'green',
@@ -123,7 +123,7 @@ export default [
   },
   {
     title: 'Holy Zealot',
-    enemyType: 3,
+    level: 3,
     health: 15,
     CP: 4,
     rewards: 'purple',
@@ -154,7 +154,7 @@ export default [
   },
   {
     title: 'Blood Mage',
-    enemyType: 1,
+    level: 1,
     health: 9,
     CP: 2,
     rewards: 'green',
@@ -194,7 +194,7 @@ export default [
   },
   {
     title: 'Loot Goblin',
-    enemyType: 3,
+    level: 3,
     health: 15,
     CP: 4,
     rewards: 'green, blue, purple',
@@ -220,7 +220,7 @@ export default [
   },
   {
     title: 'Devilish Imp',
-    enemyType: 3,
+    level: 3,
     health: 11,
     CP: 4,
     rewards: 'purple',
@@ -250,7 +250,7 @@ export default [
   },
   {
     title: 'Wither Elf',
-    enemyType: 2,
+    level: 2,
     health: 14,
     CP: 2,
     rewards: 'blue',
@@ -280,7 +280,7 @@ export default [
   },
   {
     title: 'Crushing Golem',
-    enemyType: 2,
+    level: 2,
     health: 15,
     CP: 3,
     rewards: 'blue',
@@ -306,7 +306,7 @@ export default [
   },
   {
     title: 'Goblin Enchanter',
-    enemyType: 3,
+    level: 3,
     health: 13,
     CP: 3,
     rewards: 'purple',
@@ -332,7 +332,7 @@ export default [
   },
   {
     title: 'Onibaba',
-    enemyType: 3,
+    level: 3,
     health: 13,
     CP: 2,
     rewards: 'purple',
@@ -363,7 +363,7 @@ export default [
   },
   {
     title: 'Dreg Lackey',
-    enemyType: 2,
+    level: 2,
     health: 13,
     CP: 1,
     rewards: 'blue',
@@ -394,7 +394,7 @@ export default [
   },
   {
     title: 'Wailing Banshee',
-    enemyType: 3,
+    level: 3,
     health: 14,
     CP: 2,
     rewards: 'purple',
@@ -433,7 +433,7 @@ export default [
   },
   {
     title: 'Satyr',
-    enemyType: 1,
+    level: 1,
     health: 15,
     CP: 1,
     rewards: 'green',
@@ -467,7 +467,7 @@ export default [
   },
   {
     title: 'Corrupted Rogue',
-    enemyType: 2,
+    level: 2,
     health: 14,
     CP: 5,
     rewards: 'blue',
@@ -502,7 +502,7 @@ export default [
   },
   {
     title: 'Dark Panther',
-    enemyType: 1,
+    level: 1,
     health: 8,
     CP: 2,
     rewards: 'green',
@@ -537,7 +537,7 @@ export default [
   },
   {
     title: 'Chaos Elf',
-    enemyType: 1,
+    level: 1,
     health: 13,
     CP: 1,
     rewards: 'green',
@@ -567,7 +567,7 @@ export default [
   },
   {
     title: 'Horned Harpy',
-    enemyType: 2,
+    level: 2,
     health: 9,
     CP: 3,
     rewards: 'blue',
