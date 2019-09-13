@@ -8,7 +8,7 @@ export const draw = (deck, level, boss) => {
     index = deck.findIndex(card => card.level === level);
   }
   const [card] = deck.splice(index, 1);
-  return card;
+  return { card, deck };
 };
 
 export const shuffle = (deck) => {

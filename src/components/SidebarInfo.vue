@@ -45,7 +45,7 @@
     </GameModal>
 
     <GameModal v-if="monsterModal" @close="closeMonster" size="medium">
-      <GameMonster />
+      <GameMonster @close="closeMonster" />
     </GameModal>
   </div>
 </template>
@@ -170,11 +170,12 @@ export default {
   background: var(--color-grey-100);
   padding: var(--spacing-xl) var(--spacing-md);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
   &__icon {
     cursor: pointer;
     width: 48px;
+    margin: 0 var(--spacing-sm);
   }
 }
 </style>

@@ -53,9 +53,12 @@ export default {
 :root {
   /* COLORS -- PRIMARY */
   --color-green: rgb(115, 197, 114);
+  --color-dark-green: rgb(57, 92, 56);
   --color-blue: rgb(114, 161, 197);
   --color-purple: rgb(193, 114, 197);
+  --color-dark-purple: rgb(95, 51, 97);
   --color-yellow: rgb(205, 169, 93);
+  --color-red: rgb(165, 46, 46);
 
   --color-success: rgb(60, 162, 65);
 

@@ -61,7 +61,7 @@ export default {
 .modal-content {
   margin: 0 auto;
   max-height: calc(100vh - 40px);
-  width: 640px;
+  width: 100%;
   overflow: auto;
   position: relative;
 }
@@ -79,7 +79,7 @@ export default {
 }
 
 .modal-content.tiny {
-  max-width: 220px;
+  max-width: 300px;
 }
 
 .modal-content.small {
@@ -87,13 +87,10 @@ export default {
 }
 
 .modal-content.medium {
-  max-width: 900px;
+  max-width: 800px;
 }
 
-.widget-wrap {
-    text-align: center;
-  padding: var(--spacing-xl) var(--spacing-lg);
-  background-color: var(--color-grey-100);
-  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.04);
+.modal-content.large {
+  max-width: 1100px;
 }
 </style>

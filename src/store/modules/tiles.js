@@ -48,7 +48,7 @@ export default {
     },
     chooseLevel({ state, commit }) {
       const deck = shuffle(state.levelDeck);
-      const card = draw(deck, 1);
+      const { card } = draw(deck, 1);
       commit('setLevel', card);
     },
     pickTiles({ state, commit }) {
@@ -62,17 +62,29 @@ export default {
           }
           let chosen;
           if (tile.boss && bossAttempt < state.currentLevel.bossChance && !choseBoss) {
+            const { card } = draw(deck, tile.level, null);
             chosen = {
-              ...tile, ...draw(deck, tile.level, null), revealed: false, position: [i, j],
+              ...tile,
+              ...card,
+              revealed: false,
+              position: [i, j],
             };
             bossAttempt++;
           } else if (tile.boss && bossAttempt === state.currentLevel.bossChance && !choseBoss) {
+            const { card } = draw(deck, tile.level, true);
             chosen = {
-              ...tile, ...draw(deck, tile.level, true), revealed: false, position: [i, j],
+              ...tile,
+              ...card,
+              revealed: false,
+              position: [i, j],
             };
           } else {
+            const { card } = draw(deck, tile.level, false);
             chosen = {
-              ...tile, ...draw(deck, tile.level, false), revealed: false, position: [i, j],
+              ...tile,
+              ...card,
+              revealed: false,
+              position: [i, j],
             };
           }
           if (chosen.enemyType === 4) {
