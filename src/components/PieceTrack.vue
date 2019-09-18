@@ -7,13 +7,14 @@
     }"
   >
     <div
-      v-for="player in players"
+      v-for="(player, i) in players"
       :key="player.name"
       class="piece-track__player"
       :style="{
         'grid-column-start': player.position[1] + 1,
         'grid-row-start':player.position[0] + 1,
-        'background': player.color
+        'background': player.color,
+        'transform': `translateY(${24 * i}px)`
       }"
     >{{ player.name.substring(0, 2).toUpperCase() }}</div>
   </div>
@@ -71,6 +72,7 @@ export default {
     border-radius: 50%;
     width: 60px;
     height: 60px;
+    margin-top: -48px;
   }
 }
 

@@ -1,40 +1,60 @@
 <template>
   <div class="game-player">
-    <div class="game-player__row">
-      <div class="game-player__initials">
-        <p>{{ player.name.substring(0,2).toUpperCase() }}</p>
-      </div>
-      <div class="game-player__movement">
-        <div class="movement">
-          <div
-            :class="{ disabled: upDisabled }"
-            @click="move('up', upDisabled)"
-            class="movement__arrow movement__arrow--up"
-          ></div>
-          <div
-            :class="{ disabled: downDisabled }"
-            @click="move('down', downDisabled)"
-            class="movement__arrow movement__arrow--down"
-          ></div>
-          <div
-            :class="{ disabled: leftDisabled }"
-            @click="move('left', leftDisabled)"
-            class="movement__arrow movement__arrow--left"
-          ></div>
-          <div
-            :class="{ disabled: rightDisabled }"
-            @click="move('right', rightDisabled)"
-            class="movement__arrow movement__arrow--right"
-          ></div>
+    <div class="game-player__info">
+      <div class="game-player__row">
+        <div class="game-player__initials">
+          <p :style="{color: player.color}">{{ player.name.substring(0,2).toUpperCase() }}</p>
+        </div>
+        <div class="game-player__movement">
+          <div class="movement">
+            <div
+              :class="{ disabled: upDisabled }"
+              @click="move('up', upDisabled)"
+              class="movement__arrow movement__arrow--up"
+            ></div>
+            <div
+              :class="{ disabled: downDisabled }"
+              @click="move('down', downDisabled)"
+              class="movement__arrow movement__arrow--down"
+            ></div>
+            <div
+              :class="{ disabled: leftDisabled }"
+              @click="move('left', leftDisabled)"
+              class="movement__arrow movement__arrow--left"
+            ></div>
+            <div
+              :class="{ disabled: rightDisabled }"
+              @click="move('right', rightDisabled)"
+              class="movement__arrow movement__arrow--right"
+            ></div>
+          </div>
         </div>
       </div>
+      <p class="game-player__hero">{{ player.hero }}</p>
     </div>
-    <p class="game-player__hero">{{ player.hero }}</p>
+    <div class="status-drawer" :class="{ open }">
+      <div @click="open = !open" class="status-drawer__label" :style="{backgroundColor: player.color}">
+        Status Effects
+      </div>
+      <div class="status-drawer__list">
+        <StatusEffects :character="player" characterType="player" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import StatusEffects from './StatusEffects.vue';
+
 export default {
+  components: {
+    StatusEffects,
+  },
+  data() {
+    return {
+      open: false,
+    };
+  },
   computed: {
     player() {
       return this.$store.getters.playerInfo;
@@ -80,12 +100,16 @@ export default {
 
 <style lang="scss" scoped>
 .game-player {
-  background: var(--color-grey-200);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 1;
-  padding: var(--spacing-lg) var(--spacing-xxl) var(--spacing-sm);
+
+  &__info {
+    padding: var(--spacing-lg) var(--spacing-xxl) var(--spacing-sm);
+    background: var(--color-grey-200);
+  }
 
   &__row {
     display: flex;
@@ -184,6 +208,40 @@ export default {
             border-left-color: var(--color-grey-400);
         }
     }
+  }
+}
+
+.status-drawer {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  position: absolute;
+  z-index: -1;
+  left: -40px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  transition: transform 0.3s;
+
+  &.open {
+    transform: translateX(calc(-100% + 40px));
+  }
+
+  &__label {
+    cursor: pointer;
+    writing-mode: vertical-lr;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  &__list {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-grey-400);
   }
 }
 </style>

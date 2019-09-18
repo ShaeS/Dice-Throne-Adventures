@@ -95,6 +95,7 @@ export default {
   background: var(--color-grey-400);
   border-radius: 8px;
   padding-top: var(--spacing-md);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 
   &--face-down {
     padding-top: 0;
@@ -132,6 +133,7 @@ export default {
   }
 
   &__description {
+    font-weight: bold;
     padding: var(--spacing-md);
     text-align: center;
 

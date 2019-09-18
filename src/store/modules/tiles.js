@@ -46,9 +46,9 @@ export default {
       }
       commit('setRevealed', position);
     },
-    chooseLevel({ state, commit }) {
+    chooseLevel({ state, commit }, payload) {
       const deck = shuffle(state.levelDeck);
-      const { card } = draw(deck, 1);
+      const { card } = draw(deck, payload);
       commit('setLevel', card);
     },
     pickTiles({ state, commit }) {

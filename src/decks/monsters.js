@@ -7,6 +7,7 @@ export default [
     rewards: [1],
     rollObjective: ['4-5', '4-5', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Chaotic Sorcery',
@@ -33,6 +34,7 @@ export default [
     rewards: [1],
     rollObjective: ['1-3', '1-3', '1-3', '1-3', '1-3'],
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'En Garde',
@@ -63,6 +65,7 @@ export default [
     rewards: [2],
     rollObjective: ['1-3', '1-3', '4-5', '4-5', '4-5'],
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'Sanguiblade',
@@ -103,6 +106,7 @@ export default [
     rewards: [1],
     rollObjective: ['1-3', '1-3', '1-3', '1-3', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Crush',
@@ -129,6 +133,7 @@ export default [
     rewards: [3],
     rollObjective: ['1-3', '1-3', '4-5', '4-5', '4-5'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Zealous Combat',
@@ -160,6 +165,7 @@ export default [
     rewards: [1],
     rollObjective: ['1-3', '1-3', '4-5', '4-5', '4-5'],
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'Hemo-Siphon',
@@ -200,6 +206,7 @@ export default [
     rewards: [1, 2, 3],
     rollObjective: ['1-3', '1-3', '1-3', '1-3', '1-3'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Fight or Flight',
@@ -226,6 +233,7 @@ export default [
     rewards: [3],
     rollObjective: 'Straights',
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'Mischeif',
@@ -256,6 +264,7 @@ export default [
     rewards: [2],
     rollObjective: 'Straights',
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Withered Root',
@@ -286,6 +295,7 @@ export default [
     rewards: [2],
     rollObjective: ['4-5', '4-5', '4-5'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Clobber',
@@ -312,6 +322,7 @@ export default [
     rewards: [3],
     rollObjective: ['1-3', '4-5', '4-5', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Ensorcell',
@@ -338,6 +349,7 @@ export default [
     rewards: [3],
     rollObjective: ['4-5', '4-5', '4-5', '4-5'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Alure',
@@ -369,6 +381,7 @@ export default [
     rewards: [2],
     rollObjective: ['1-3', '1-3', '4-5', '4-5', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Master\'s Embrace',
@@ -400,6 +413,7 @@ export default [
     rewards: [3],
     rollObjective: ['6', '6', '6', '6', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Sonic Scream',
@@ -439,6 +453,7 @@ export default [
     rewards: [1],
     rollObjective: ['1-3', '1-3', '4-5', '4-5', '6'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Ram',
@@ -473,6 +488,7 @@ export default [
     rewards: [2],
     rollObjective: 'Straights',
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'Cunning Strike',
@@ -508,6 +524,7 @@ export default [
     rewards: [1],
     rollObjective: ['1-3', '1-3', '1-3', '1-3', '1-3'],
     firstStrike: true,
+    statusEffects: [],
     attacks: [
       {
         title: 'Shred',
@@ -543,6 +560,7 @@ export default [
     rewards: [1],
     rollObjective: 'Straights',
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Withered Root',
@@ -573,6 +591,7 @@ export default [
     rewards: [2],
     rollObjective: ['4-5', '4-5', '4-5', '4-5', '4-5'],
     firstStrike: false,
+    statusEffects: [],
     attacks: [
       {
         title: 'Aerial Dive',
@@ -607,6 +626,11 @@ export default [
     rewards: [3],
     rollObjective: ['6', '6'],
     firstStrike: false,
+    statusEffects: [
+      { title: 'Chaos Token' },
+      { title: 'Chaos Token' },
+      { title: 'Chaos Token' },
+    ],
     attacks: [
       {
         title: 'Plurabite',
@@ -630,5 +654,42 @@ export default [
       },
     ],
     additional: 'Setup: Begin with 3 Heads in play (represented by Chaos Tokens).',
+  },
+  {
+    title: 'Chaos Knight',
+    level: 3,
+    health: 15,
+    CP: 2,
+    rewards: [3],
+    rollObjective: 'Straights',
+    firstStrike: false,
+    statusEffects: [],
+    attacks: [
+      {
+        title: 'Unholy Attack',
+        rolls: [
+          {
+            roll: 'Small Straight',
+            description: 'Heal 2, deal 5 dmg.',
+          },
+          {
+            roll: 'Large Straight',
+            description: 'Heal 3, deal 7 dmg.',
+          },
+        ],
+        description: 'Deal 6 + 3 dmg per head.',
+      },
+    ],
+    passive: [
+      {
+        description: 'On a failed Offensive Roll, gain Crit.',
+      },
+    ],
+    defense: [
+      {
+        dice: 4,
+        description: 'On [1, 2, 3], deal 1 dmg. Prevent 1x[4, 5] + 2x[6] dmg.',
+      },
+    ],
   },
 ];

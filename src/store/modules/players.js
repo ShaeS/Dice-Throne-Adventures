@@ -6,6 +6,14 @@ const initialState = {
       hero: 'Barbarian',
       position: [4, 1],
       color: 'rgb(205, 169, 93)',
+      statusEffects: [],
+    },
+    {
+      name: 'Jasmine',
+      hero: 'Pyromancer',
+      position: [4, 1],
+      color: 'rgb(100, 169, 240)',
+      statusEffects: [],
     },
   ],
 };
@@ -25,6 +33,12 @@ export default {
     },
   },
   mutations: {
+    setActivePlayer(state, payload) {
+      state.activePlayer = payload;
+    },
+    addPlayer(state, payload) {
+      state.players.push(payload);
+    },
     setPlayerPosition(state, payload) {
       const position = state.players[state.activePlayer].position.slice();
       let newPosition = [];
@@ -44,6 +58,16 @@ export default {
         default:
       }
       state.players[state.activePlayer].position = newPosition;
+    },
+  },
+  actions: {
+    nextPlayer({ state, commit }) {
+      let index = 0;
+      if (state.activePlayer < state.players.length - 1) {
+        index = state.activePlayer + 1;
+        console.log(index);
+      }
+      commit('setActivePlayer', index);
     },
   },
 };

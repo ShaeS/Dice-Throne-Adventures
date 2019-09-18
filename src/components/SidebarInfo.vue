@@ -1,5 +1,8 @@
 <template>
   <div class="sidebar" :class="{ open }">
+    <div @click="open = !open" class="sidebar__toggle">
+      <SettingsIcon />
+    </div>
     <div class="sidebar__line">
       <h3>Gold:</h3>
       <MinusIcon @click.native="decrementState( 'gold' )" class="sidebar__increment" />
@@ -28,8 +31,9 @@
           />
       </div>
     </template>
-    <div @click="open = !open" class="sidebar__toggle">
-      <SettingsIcon />
+
+    <div class="sidebar__line">
+      <button @click="nextPlayer" class="button button--large">Next Turn</button>
     </div>
 
     <GameModal v-if="spawnModal" @close="spawnModal = false" size="tiny">
@@ -75,7 +79,7 @@ export default {
   },
   data() {
     return {
-      open: true,
+      open: false,
       spawnModal: false,
       monsterModal: false,
     };
@@ -101,7 +105,7 @@ export default {
       this.unsetActiveMonster();
     },
     ...mapMutations(['decrementState', 'incrementState', 'setActiveMonster', 'unsetActiveMonster']),
-    ...mapActions(['drawMonster']),
+    ...mapActions(['drawMonster', 'nextPlayer']),
   },
 };
 </script>
@@ -115,6 +119,7 @@ export default {
   width: 300px;
   background: var(--color-grey-300);
   padding: var(--spacing-xl);
+  box-shadow: 2px 0 16px rgba(0,0,0,0.4);
   transform: translateX(-100%);
   transition: transform 0.3s;
 

@@ -1,11 +1,14 @@
 <template>
   <div id="app">
-    <div ref="board" class="board-wrap">
-      <GameBoard />
-      <PieceTrack />
-    </div>
-    <GamePlayer />
-    <SidebarInfo />
+    <GameSetup v-if="!gameActive" @begin="runSetup($event)" />
+    <template v-else>
+      <div ref="board" class="board-wrap">
+        <GameBoard />
+        <PieceTrack />
+      </div>
+      <GamePlayer />
+      <SidebarInfo />
+    </template>
 
     <transition name="fade">
       <portal-target name="modals"></portal-target>
@@ -15,8 +18,9 @@
 
 <script>
 import panzoom from 'panzoom';
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
+import GameSetup from './components/GameSetup.vue';
 import PieceTrack from './components/PieceTrack.vue';
 import GameBoard from './components/GameBoard.vue';
 import GamePlayer from './components/GamePlayer.vue';
@@ -25,26 +29,51 @@ import SidebarInfo from './components/SidebarInfo.vue';
 export default {
   name: 'app',
   components: {
+    GameSetup,
     PieceTrack,
     GameBoard,
     GamePlayer,
     SidebarInfo,
   },
-  mounted() {
-    panzoom(this.$refs.board, {
-      zoomSpeed: 0.1,
-      maxZoom: 1.5,
-      minZoom: 0.25,
-      zoomDoubleClickSpeed: 1,
-    }).zoomAbs(1000, -2000, 0.75);
-    this.chooseLevel();
-    this.pickTiles();
+  data() {
+    return {
+      setupModal: false,
+    };
+  },
+  created() {
+    if (this.players.length === 0) {
+      this.setupModal = true;
+    }
+  },
+  computed: {
+    gameActive() {
+      return this.$store.state.gameActive;
+    },
+    players() {
+      return this.$store.state.players.players;
+    },
   },
   methods: {
+    ...mapMutations([
+      'setGameActive',
+    ]),
     ...mapActions([
       'chooseLevel',
       'pickTiles',
     ]),
+    runSetup(level) {
+      this.chooseLevel(level);
+      this.pickTiles();
+      this.setGameActive();
+      this.$nextTick(() => {
+        panzoom(this.$refs.board, {
+          zoomSpeed: 0.1,
+          maxZoom: 1.5,
+          minZoom: 0.25,
+          zoomDoubleClickSpeed: 1,
+        }).zoomAbs(1000, -2000, 0.75);
+      });
+    },
   },
 };
 </script>
@@ -57,7 +86,7 @@ export default {
   --color-blue: rgb(114, 161, 197);
   --color-purple: rgb(193, 114, 197);
   --color-dark-purple: rgb(95, 51, 97);
-  --color-yellow: rgb(205, 169, 93);
+  --color-yellow: rgb(192, 153, 68);
   --color-red: rgb(165, 46, 46);
 
   --color-success: rgb(60, 162, 65);
@@ -68,10 +97,10 @@ export default {
   --color-grey-300: hsl(0, 0%, 81%);
   --color-grey-400: hsl(0, 0%, 69%);
   --color-grey-500: hsl(0, 0%, 62%);
-  --color-grey-600: hsl(0, 0%, 49%);
-  --color-grey-700: hsl(0, 0%, 38%);
-  --color-grey-800: hsl(0, 0%, 32%);
-  --color-grey-900: hsl(0, 0%, 23%);
+  --color-grey-600: hsl(0, 0%, 47%);
+  --color-grey-700: hsl(0, 0%, 35%);
+  --color-grey-800: hsl(0, 0%, 28%);
+  --color-grey-900: hsl(0, 0%, 19%);
   --color-grey-1000: hsl(0, 0%, 13%);
 
   /* SPACING */
@@ -137,6 +166,7 @@ body {
 }
 
 .button {
+  cursor: pointer;
   display: inline-block;
   background: var(--color-grey-900);
   color: var(--color-grey-100);
@@ -153,12 +183,25 @@ body {
     padding: var(--spacing-md) var(--spacing-md);
   }
 
+  &--primary {
+    background: var(--color-yellow);
+  }
+
   &--success {
     background: var(--color-success);
   }
 }
 
+.add-status {
+
+  .tooltip-inner {
+    padding: 0 !important;
+  }
+}
+
 .tooltip {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  max-width: 400px;
   display: block !important;
   z-index: 10000;
 
@@ -166,7 +209,7 @@ body {
     background: var(--color-grey-1000);
     color: white;
     border-radius: 4px;
-    padding: 4px 12px 4px;
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 
   .tooltip-arrow {
@@ -174,20 +217,20 @@ body {
     height: 0;
     border-style: solid;
     position: absolute;
-    margin: 4px;
+    margin: var(--spacing-xxs);
     border-color: var(--color-grey-1000);
   }
 
   &[x-placement^="top"] {
-    margin-bottom: 4px;
+    margin-bottom: var(--spacing-xxs);
 
     .tooltip-arrow {
-      border-width: 4px 4px 0 4px;
+      border-width: var(--spacing-xxs) var(--spacing-xxs) 0 var(--spacing-xxs);
       border-left-color: transparent !important;
       border-right-color: transparent !important;
       border-bottom-color: transparent !important;
       bottom: -4px;
-      left: calc(50% - 4px);
+      left: calc(50% - var(--spacing-xxs));
       margin-top: 0;
       margin-bottom: 0;
     }

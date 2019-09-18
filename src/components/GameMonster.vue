@@ -90,8 +90,9 @@
         </div>
       </div>
     </div>
-    <div class="monster__discard" v-if="monster.health < 1">
-      <button @click="discard" class="button">Discard Monster</button>
+    <div class="monster__discard" v-if="monster.health < 1 || true">
+      <button v-if="monster.health < 1" @click="discard" class="button">Discard Monster</button>
+      <StatusEffects :character="monster" characterType="monster" />
     </div>
   </div>
 </template>
@@ -107,6 +108,7 @@ import MinusIcon from '../icons/MinusIcon.vue';
 import PlusIcon from '../icons/PlusIcon.vue';
 import TreasureIcon from '../icons/TreasureIcon.vue';
 import MonsterDice from '../icons/MonsterDice.vue';
+import StatusEffects from './StatusEffects.vue';
 
 Vue.component('monster-dice', MonsterDice);
 
@@ -119,6 +121,7 @@ export default {
     PlusIcon,
     TreasureIcon,
     MonsterDice,
+    StatusEffects,
   },
   computed: {
     monster() {
