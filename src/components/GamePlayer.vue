@@ -37,7 +37,7 @@
         Status Effects
       </div>
       <div class="status-drawer__list">
-        <StatusEffects :character="player" characterType="player" />
+        <StatusEffects :statusList="player.statusEffects" characterType="player" />
       </div>
     </div>
   </div>
@@ -234,6 +234,7 @@ export default {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    color: white;
   }
 
   &__list {

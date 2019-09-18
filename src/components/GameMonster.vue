@@ -92,7 +92,7 @@
     </div>
     <div class="monster__discard" v-if="monster.health < 1 || true">
       <button v-if="monster.health < 1" @click="discard" class="button">Discard Monster</button>
-      <StatusEffects :character="monster" characterType="monster" />
+      <StatusEffects :statusList="monster.statusEffects" characterType="monster" />
     </div>
   </div>
 </template>

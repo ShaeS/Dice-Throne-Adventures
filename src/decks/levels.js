@@ -2,6 +2,7 @@ export default [
   {
     level: 1,
     bossChance: 3,
+    startingPosition: [4, 1],
     layout: [
       [
         null,

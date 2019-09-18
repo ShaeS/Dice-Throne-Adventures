@@ -1,7 +1,7 @@
 <template>
     <div class="status-effects">
         <div class="status-effects__list">
-            <div v-tooltip.top-center="status.description" v-for="(status, index) in character.statusEffects" :key="status.title + index" class="status-effects__pill">
+            <div v-tooltip.top-center="status.description" v-for="(status, index) in statusList" :key="status.title + index" class="status-effects__pill">
                 {{ status.title }}
                 <span class="status-effects__remove" @click="removeStatus({index, characterType})"><PlusIcon class="status-effects__remove-icon" /></span>
             </div>
@@ -35,7 +35,7 @@ export default {
     PlusIcon,
   },
   props: {
-    character: Object,
+    statusList: Array,
     characterType: String,
   },
   data() {

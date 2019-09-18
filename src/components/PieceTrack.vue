@@ -73,6 +73,7 @@ export default {
     width: 60px;
     height: 60px;
     margin-top: -48px;
+    color: white;
   }
 }
 

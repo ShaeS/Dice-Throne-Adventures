@@ -60,10 +60,12 @@ export default {
     ...mapActions([
       'chooseLevel',
       'pickTiles',
+      'initialPlayerPositions',
     ]),
     runSetup(level) {
       this.chooseLevel(level);
       this.pickTiles();
+      this.initialPlayerPositions();
       this.setGameActive();
       this.$nextTick(() => {
         panzoom(this.$refs.board, {
@@ -175,6 +177,10 @@ body {
   font-size: 12px;
   padding: var(--spacing-sm) var(--spacing-md);
   outline: 0;
+
+  &:disabled {
+    background: var(--color-grey-400);
+  }
 
   &--large {
     width: 100%;

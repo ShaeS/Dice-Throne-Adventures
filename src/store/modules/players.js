@@ -1,21 +1,6 @@
 const initialState = {
   activePlayer: 0,
-  players: [
-    {
-      name: 'Shae',
-      hero: 'Barbarian',
-      position: [4, 1],
-      color: 'rgb(205, 169, 93)',
-      statusEffects: [],
-    },
-    {
-      name: 'Jasmine',
-      hero: 'Pyromancer',
-      position: [4, 1],
-      color: 'rgb(100, 169, 240)',
-      statusEffects: [],
-    },
-  ],
+  players: [],
 };
 
 export default {
@@ -33,11 +18,17 @@ export default {
     },
   },
   mutations: {
+    setInitialPosition(state, payload) {
+      state.players[payload.index].position = payload.position;
+    },
     setActivePlayer(state, payload) {
       state.activePlayer = payload;
     },
     addPlayer(state, payload) {
-      state.players.push(payload);
+      state.players.unshift(payload);
+    },
+    editPlayer(state, payload) {
+      state.players.splice(state.activePlayer, 1, payload);
     },
     setPlayerPosition(state, payload) {
       const position = state.players[state.activePlayer].position.slice();
@@ -65,9 +56,14 @@ export default {
       let index = 0;
       if (state.activePlayer < state.players.length - 1) {
         index = state.activePlayer + 1;
-        console.log(index);
       }
       commit('setActivePlayer', index);
+    },
+    initialPlayerPositions({ state, commit, rootState }) {
+      state.players.map((player, index) => {
+        commit('setInitialPosition', { index, position: rootState.tiles.currentLevel.startingPosition });
+        return null;
+      });
     },
   },
 };

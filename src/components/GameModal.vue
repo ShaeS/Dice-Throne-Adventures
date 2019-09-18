@@ -1,11 +1,11 @@
 <template>
   <portal to="modals">
     <div class="modal is-active">
-      <div @click="$emit( 'close' )" class="modal-background"></div>
+      <div @click="close" class="modal-background"></div>
       <div class="modal-content" :class="size">
         <slot></slot>
       </div>
-      <button @click="$emit( 'close' )" class="modal-close is-large" aria-label="close">
+      <button v-if="!disableClose" @click="close" class="modal-close is-large" aria-label="close">
         <PlusIcon />
       </button>
     </div>
@@ -19,12 +19,25 @@ export default {
   components: {
     PlusIcon,
   },
-  props: ['size'],
+  props: {
+    size: String,
+    disableClose: {
+      default: false,
+      type: Boolean,
+    },
+  },
   created() {
     document.documentElement.style.overflow = 'hidden';
   },
   beforeDestroy() {
     document.documentElement.style.overflow = 'visible';
+  },
+  methods: {
+    close() {
+      if (!this.disableClose) {
+        this.$emit('close');
+      }
+    },
   },
 };
 </script>

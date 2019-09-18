@@ -22,7 +22,7 @@
         >
             {{ player.name.substring(0, 2).toUpperCase() }}
         </div>
-        <div class="game-setup__player">
+        <div @click="modal = true" class="game-setup__player">
             <PlusIcon class="game-setup__add-player" />
         </div>
     </div>
@@ -30,8 +30,8 @@
     <button @click="$emit('begin', level)" class="button button--primary">Begin Game</button>
 
 
-    <GameModal v-if="modal" @close="modal = false" size="small">
-      <AddPlayer />
+    <GameModal v-if="modal" size="small" :disableClose="true">
+      <PlayerModal @close="modal = false" />
     </GameModal>
   </div>
 </template>
@@ -39,13 +39,13 @@
 <script>
 import PlusIcon from '../icons/PlusIcon.vue';
 import GameModal from './GameModal.vue';
-import AddPlayer from './AddPlayer.vue';
+import PlayerModal from './PlayerModal.vue';
 
 export default {
   components: {
     PlusIcon,
     GameModal,
-    AddPlayer,
+    PlayerModal,
   },
   data() {
     return {
@@ -123,7 +123,7 @@ export default {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
         font-family: var(--font-serif);
         border-radius: 50%;
