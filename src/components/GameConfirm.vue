@@ -1,7 +1,7 @@
 <template>
     <div class="confirm">
         <h3>{{ text }}</h3>
-        <button @click="$emit('reveal')" class="button button--success">Confirm</button>
+        <button @click="$emit('confirm')" class="button button--success">Confirm</button>
         <button @click="$emit('close')" class="button">Cancel</button>
     </div>
 </template>

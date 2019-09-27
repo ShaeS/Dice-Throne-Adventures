@@ -47,7 +47,7 @@
     <GameModal v-if="modalOpen" @close="modalOpen = false" size="tiny">
       <GameConfirm
         @close="modalOpen = false"
-        @reveal="revealTile(tile.position);modalOpen = false"
+        @confirm="revealTile(tile.position);modalOpen = false"
         text="Are you sure you want to reveal tile?"
       />
     </GameModal>

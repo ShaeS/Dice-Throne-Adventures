@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export default {
-  state: initialState,
+  state: { ...initialState },
   getters: {
     boardWidth(state) {
       if (state.currentLevel) {
@@ -34,6 +34,11 @@ export default {
     },
     setRevealed(state, payload) {
       state.boardTiles[payload[0]][payload[1]].revealed = true;
+    },
+    resetTileState(state) {
+      Object.keys(initialState).forEach((key) => {
+        state[key] = initialState[key];
+      });
     },
   },
   actions: {

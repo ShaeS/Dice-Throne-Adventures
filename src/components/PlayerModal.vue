@@ -2,7 +2,7 @@
     <div class="player-modal">
         <div class="player-modal__group">
             <label class="player-modal__label" for="name-field">Name</label>
-            <input type="text" id="name-field" v-model="name" />
+            <input ref="input" type="text" id="name-field" v-model="name" />
         </div>
 
         <div class="player-modal__group">
@@ -60,6 +60,10 @@ export default {
   created() {
     this.addPlayer(this.playerObj);
   },
+  mounted() {
+    console.log(this.$refs.input);
+    this.$refs.input.focus();
+  },
   computed: {
     player() {
       return this.$store.getters.playerInfo;
@@ -71,6 +75,7 @@ export default {
         position: [0, 0],
         color: this.hero.color,
         statusEffects: this.statusEffects,
+        loot: [],
       };
     },
   },

@@ -13,7 +13,7 @@
     <h3 class="game-setup__title">Choose Players</h3>
     <div class="game-setup__players">
         <div
-            v-for="player in players"
+            v-for="(player, i) in players"
             :key="player.name"
             class="game-setup__player"
             :style="{
@@ -21,13 +21,14 @@
             }"
         >
             {{ player.name.substring(0, 2).toUpperCase() }}
+            <PlusIcon @click.native="removePlayer(i)" class="game-setup__remove-player" />
         </div>
         <div @click="modal = true" class="game-setup__player">
             <PlusIcon class="game-setup__add-player" />
         </div>
     </div>
 
-    <button @click="$emit('begin', level)" class="button button--primary">Begin Game</button>
+    <button :disabled="players.length < 2" @click="$emit('begin', level)" class="button button--primary">Begin Game</button>
 
 
     <GameModal v-if="modal" size="small" :disableClose="true">
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import PlusIcon from '../icons/PlusIcon.vue';
 import GameModal from './GameModal.vue';
 import PlayerModal from './PlayerModal.vue';
@@ -57,6 +59,9 @@ export default {
     players() {
       return this.$store.state.players.players;
     },
+  },
+  methods: {
+    ...mapMutations(['removePlayer']),
   },
 };
 </script>
@@ -119,6 +124,7 @@ export default {
     }
 
     &__player {
+      position: relative;
         box-shadow: 0 1px 2px rgba(0,0,0,0.6);
         display: inline-flex;
         align-items: center;
@@ -132,6 +138,26 @@ export default {
         margin-right: var(--spacing-md);
         margin-bottom: var(--spacing-md);
         background: var(--color-grey-200);
+
+        &:hover {
+          .game-setup__remove-player {
+            opacity: 0.8;
+          }
+        }
+    }
+
+    &__remove-player {
+      cursor: pointer;
+      transition: opacity 0.2s;
+      opacity: 0;
+      background: var(--color-grey-100);
+      border-radius: 50%;
+      padding: var(--spacing-sm);
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 48px;
     }
 
     &__add-player {

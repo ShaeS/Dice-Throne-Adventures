@@ -13,7 +13,7 @@
             <button class="button">Add Status</button>
 
             <template slot="popover">
-                <input class="add-status__input" placeholder="Search for Status" v-model="statusSearch" />
+                <input type="text" class="add-status__input" placeholder="Search for Status" v-model="statusSearch" />
 
                 <ul class="add-status__list">
                     <li v-close-popover @click="addStatus({status, characterType})" class="add-status__single" v-for="status in filteredStatus" :key="status.title">
@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapMutations } from 'vuex';
+import statusEffects from '../decks/status';
 import PlusIcon from '../icons/PlusIcon.vue';
 
 export default {
@@ -41,10 +42,10 @@ export default {
   data() {
     return {
       statusSearch: '',
+      statusEffects,
     };
   },
   computed: {
-    ...mapState(['statusEffects']),
     filteredStatus() {
       return this.statusEffects.filter(option => option.title.toLowerCase().startsWith(this.statusSearch.toLowerCase()));
     },

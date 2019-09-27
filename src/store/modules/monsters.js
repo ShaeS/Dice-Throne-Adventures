@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default {
-  state: initialState,
+  state: { ...initialState },
   mutations: {
     setMonsterDeck(state, payload) {
       state.deck = payload;
@@ -33,6 +33,11 @@ export default {
     setMonsterHealth(state, payload) {
       const newHealth = state.activeMonster.health + payload;
       state.activeMonster.health = newHealth;
+    },
+    resetMonsterState(state) {
+      Object.keys(initialState).forEach((key) => {
+        state[key] = initialState[key];
+      });
     },
   },
   actions: {

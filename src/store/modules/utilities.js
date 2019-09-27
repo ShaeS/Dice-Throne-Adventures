@@ -1,9 +1,11 @@
-export const draw = (deck, level, boss) => {
+export const draw = (deck, level, boss, id) => {
   let index;
   if (boss === false) {
     index = deck.findIndex(card => card.level === level && card.enemyType !== 4);
   } else if (boss === true) {
     index = deck.findIndex(card => card.enemyType === 4);
+  } else if (id) {
+    index = deck.findIndex(card => card.id === id);
   } else {
     index = deck.findIndex(card => card.level === level);
   }

@@ -36,6 +36,26 @@
       <button @click="nextPlayer" class="button button--large">Next Turn</button>
     </div>
 
+    <div class="sidebar__line">
+      <button @click="lootModal = true" class="button button--large">Loot Board</button>
+    </div>
+
+    <div class="sidebar__line new-game">
+      <button @click="confirmModal = true" class="button button--large">New Game</button>
+    </div>
+
+    <GameModal v-if="confirmModal" @close="confirmModal = false" size="tiny">
+      <GameConfirm
+        @close="confirmModal = false"
+        @confirm="newGame();confirmModal = false"
+        text="Are you sure you want to start a new game?"
+      />
+    </GameModal>
+
+    <GameModal v-if="lootModal" @close="lootModal = false" size="large">
+      <LootBoard />
+    </GameModal>
+
     <GameModal v-if="spawnModal" @close="spawnModal = false" size="tiny">
       <div class="monster-select">
         <EnemyIcon
@@ -64,7 +84,9 @@ import MinusIcon from '../icons/MinusIcon.vue';
 import PlusIcon from '../icons/PlusIcon.vue';
 import SettingsIcon from '../icons/SettingsIcon.vue';
 import GameModal from './GameModal.vue';
+import GameConfirm from './GameConfirm.vue';
 import GameMonster from './GameMonster.vue';
+import LootBoard from './LootBoard.vue';
 
 export default {
   components: {
@@ -75,13 +97,17 @@ export default {
     MinusIcon,
     PlusIcon,
     GameModal,
+    GameConfirm,
     GameMonster,
+    LootBoard,
   },
   data() {
     return {
       open: false,
       spawnModal: false,
       monsterModal: false,
+      confirmModal: false,
+      lootModal: false,
     };
   },
   computed: {
@@ -105,20 +131,22 @@ export default {
       this.unsetActiveMonster();
     },
     ...mapMutations(['decrementState', 'incrementState', 'setActiveMonster', 'unsetActiveMonster']),
-    ...mapActions(['drawMonster', 'nextPlayer']),
+    ...mapActions(['drawMonster', 'nextPlayer', 'newGame']),
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .sidebar {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   width: 300px;
   background: var(--color-grey-300);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-xl) 0;
   box-shadow: 2px 0 16px rgba(0,0,0,0.4);
   transform: translateX(-100%);
   transition: transform 0.3s;
@@ -168,6 +196,10 @@ export default {
 
   &__increment {
     width: 20px;
+  }
+
+  .new-game {
+    margin-top: auto;
   }
 }
 

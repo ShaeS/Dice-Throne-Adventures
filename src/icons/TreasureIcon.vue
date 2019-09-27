@@ -1,6 +1,6 @@
 <template>
   <svg
-    :class="{ green: level === 1, blue: level === 2, purple: level === 3 }"
+    :class="{ green: level === 1, blue: level === 2, purple: level === 3, orange: level === 4 }"
     version="1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
@@ -29,5 +29,8 @@ export default {
 }
 .purple {
   fill: var(--color-purple);
+}
+.orange {
+  fill: var(--color-orange);
 }
 </style>

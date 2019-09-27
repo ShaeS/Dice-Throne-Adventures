@@ -4,7 +4,7 @@ const initialState = {
 };
 
 export default {
-  state: initialState,
+  state: { ...initialState },
   getters: {
     playerInfo(state) {
       return state.players[state.activePlayer];
@@ -18,6 +18,9 @@ export default {
     },
   },
   mutations: {
+    setLoot(state, payload) {
+      state.players[state.activePlayer].loot.push(payload);
+    },
     setInitialPosition(state, payload) {
       state.players[payload.index].position = payload.position;
     },
@@ -26,6 +29,9 @@ export default {
     },
     addPlayer(state, payload) {
       state.players.unshift(payload);
+    },
+    removePlayer(state, payload) {
+      state.players.splice(payload, 1);
     },
     editPlayer(state, payload) {
       state.players.splice(state.activePlayer, 1, payload);

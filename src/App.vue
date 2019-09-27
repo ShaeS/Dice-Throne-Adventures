@@ -45,6 +45,11 @@ export default {
       this.setupModal = true;
     }
   },
+  mounted() {
+    if (this.gameActive) {
+      this.initPanzoom();
+    }
+  },
   computed: {
     gameActive() {
       return this.$store.state.gameActive;
@@ -68,13 +73,16 @@ export default {
       this.initialPlayerPositions();
       this.setGameActive();
       this.$nextTick(() => {
-        panzoom(this.$refs.board, {
-          zoomSpeed: 0.1,
-          maxZoom: 1.5,
-          minZoom: 0.25,
-          zoomDoubleClickSpeed: 1,
-        }).zoomAbs(1000, -2000, 0.75);
+        this.initPanzoom();
       });
+    },
+    initPanzoom() {
+      panzoom(this.$refs.board, {
+        zoomSpeed: 0.1,
+        maxZoom: 1.5,
+        minZoom: 0.25,
+        zoomDoubleClickSpeed: 1,
+      }).zoomAbs(1000, -2000, 0.75);
     },
   },
 };
@@ -87,6 +95,7 @@ export default {
   --color-dark-green: rgb(57, 92, 56);
   --color-blue: rgb(114, 161, 197);
   --color-purple: rgb(193, 114, 197);
+  --color-orange: rgb(243, 149, 42);
   --color-dark-purple: rgb(95, 51, 97);
   --color-yellow: rgb(192, 153, 68);
   --color-red: rgb(165, 46, 46);
@@ -95,9 +104,9 @@ export default {
 
   /* COLORS -- GREY */
   --color-grey-100: hsl(0, 0%, 97%);
-  --color-grey-200: hsl(0, 0%, 88%);
-  --color-grey-300: hsl(0, 0%, 81%);
-  --color-grey-400: hsl(0, 0%, 69%);
+  --color-grey-200: hsl(0, 0%, 91%);
+  --color-grey-300: hsl(0, 0%, 83%);
+  --color-grey-400: hsl(0, 0%, 72%);
   --color-grey-500: hsl(0, 0%, 62%);
   --color-grey-600: hsl(0, 0%, 47%);
   --color-grey-700: hsl(0, 0%, 35%);

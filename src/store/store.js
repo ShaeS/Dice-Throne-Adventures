@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 import monsters from './modules/monsters';
 import tiles from './modules/tiles';
 import players from './modules/players';
-import StatusEffects from '../decks/status';
 
 
 Vue.use(Vuex);
@@ -13,11 +13,11 @@ const initialState = {
   gameActive: false,
   bossCP: 10,
   gold: 0,
-  statusEffects: StatusEffects,
 };
 
 export default new Vuex.Store({
-  state: initialState,
+  plugins: [createPersistedState()],
+  state: { ...initialState },
   mutations: {
     setGameActive(state) {
       state.gameActive = true;
@@ -45,6 +45,18 @@ export default new Vuex.Store({
       } else if (characterType === 'monster') {
         state.monsters.activeMonster.statusEffects.splice(index, 1);
       }
+    },
+    resetRootState(state) {
+      Object.keys(initialState).forEach((key) => {
+        state[key] = initialState[key];
+      });
+    },
+  },
+  actions: {
+    newGame({ commit }) {
+      commit('resetRootState');
+      commit('resetTileState');
+      commit('resetMonsterState');
     },
   },
   modules: {
