@@ -692,4 +692,40 @@ export default [
       },
     ],
   },
+  {
+    title: 'Blind Archer',
+    level: 3,
+    health: 14,
+    CP: 3,
+    rewards: [3],
+    rollObjective: ['4-5', '4-5', '4-5', '4-5', '4-5'],
+    firstStrike: false,
+    statusEffects: [],
+    attacks: [
+      {
+        title: 'True Sight',
+        rolls: [
+          {
+            roll: ['4-5', '4-5', '4-5'],
+            description: 'Deal 6 dmg.',
+          },
+          {
+            roll: ['4-5', '4-5', '4-5', '4-5'],
+            description: 'Deal 7 dmg.',
+          },
+          {
+            roll: ['4-5', '4-5', '4-5', '4-5', '4-5'],
+            description: 'Deal 8 dmg.',
+          },
+        ],
+        description: 'On 3-of-a-kind (#\'s), inflict Barbed Vine on all opponents.',
+      },
+    ],
+    defense: [
+      {
+        dice: 5,
+        description: 'Deal 1x[1-3] + 1x[4-5] dmg. On [6], this dmg is dealt to all Engaged opponents.',
+      },
+    ],
+  },
 ];
