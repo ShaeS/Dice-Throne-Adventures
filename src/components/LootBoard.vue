@@ -15,11 +15,24 @@
             <component :is="formatLoot(item)"></component>
         </div>
       </div>
+      <div class="loot-board__pickup">
+        <h2 class="loot-board__pickup-title">Pick Up Loot</h2>
+        <div class="loot-board__pickup-wrap">
+          <CardIcon
+            v-for="level in 4"
+            :key="level"
+            @click.native="drawLoot(level)"
+            class="loot-board__pickup-icon"
+            :level="level"
+          />
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
+import { mapActions } from 'vuex';
 import tableData from '../decks/loot-table';
 import TreasureIcon from '../icons/TreasureIcon.vue';
 import CPIcon from '../icons/CPIcon.vue';
@@ -27,6 +40,7 @@ import HealthIcon from '../icons/HealthIcon.vue';
 import GoldIcon from '../icons/GoldIcon.vue';
 import CardIcon from '../icons/CardIcon.vue';
 import DamageToken from '../icons/DamageToken.vue';
+
 
 Vue.component('cp-icon', CPIcon);
 Vue.component('health-icon', HealthIcon);
@@ -38,9 +52,7 @@ Vue.component('damage-token', DamageToken);
 export default {
   components: {
     TreasureIcon,
-    CPIcon,
-    HealthIcon,
-    GoldIcon,
+    CardIcon,
   },
   data() {
     return {
@@ -48,6 +60,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['drawLoot']),
     formatLoot(string) {
       let html = '';
       if (string.includes('CP:')) {
@@ -104,6 +117,26 @@ export default {
         width: 48px;
         margin: 0 var(--spacing-xxxs);
         margin-right: var(--spacing-lg);
+  }
+
+  &__pickup {
+    width: 100%;
+    background: var(--color-grey-200);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    text-align: center;
+  }
+  &__pickup-wrap {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+  }
+
+  &__pickup-icon {
+    cursor: pointer;
+    width: 48px;
+    margin: 0 var(--spacing-sm);
   }
 }
 

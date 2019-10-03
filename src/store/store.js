@@ -5,6 +5,7 @@ import createPersistedState from 'vuex-persistedstate';
 import monsters from './modules/monsters';
 import tiles from './modules/tiles';
 import players from './modules/players';
+import loot from './modules/loot';
 
 
 Vue.use(Vuex);
@@ -63,5 +64,6 @@ export default new Vuex.Store({
     monsters,
     tiles,
     players,
+    loot,
   },
 });

@@ -74,7 +74,7 @@ export default {
 .modal-content {
   margin: 0 auto;
   max-height: calc(100vh - 40px);
-  width: 100%;
+  width: calc(100% - var(--spacing-xxl));
   overflow: auto;
   position: relative;
 }

@@ -196,6 +196,7 @@ export default [
     bossCP: 3,
     enemyType: 4,
     description: 'Spawn the Fallen Gunslinger',
+    bossName: 'FallenGunslinger',
   },
   {
     level: 3,
@@ -205,5 +206,6 @@ export default [
     bossCP: 3,
     enemyType: 4,
     description: 'Spawn the Fallen Barbarian',
+    bossName: 'FallenBarbarian',
   },
 ];

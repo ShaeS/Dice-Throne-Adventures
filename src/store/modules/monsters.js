@@ -1,10 +1,12 @@
 import GameMonsters from '../../decks/monsters';
+import FallenBarbarian from '../../decks/boss/barbarian';
 import { shuffle, draw } from './utilities';
 
 const initialState = {
   deck: GameMonsters,
   activeMonster: null,
   monsters: [],
+  boss: false,
 };
 
 export default {
@@ -21,6 +23,11 @@ export default {
       state.monsters.splice(index, 1);
     },
     setActiveMonster(state, payload) {
+      if (payload.level) {
+        state.boss = false;
+      } else {
+        state.boss = true;
+      }
       state.activeMonster = payload;
     },
     unsetActiveMonster(state) {
@@ -39,14 +46,39 @@ export default {
         state[key] = initialState[key];
       });
     },
+    setBoss(state, payload) {
+      state.boss = payload;
+    },
   },
   actions: {
     drawMonster({ state, commit }, level) {
       const shuffledDeck = shuffle(state.deck);
       const { card, deck } = draw(shuffledDeck, level);
+      commit('setBoss', false);
       commit('setMonsterDeck', deck);
       commit('addMonster', card);
       commit('setActiveMonster', card);
+    },
+    spawnBoss({ commit, dispatch }) {
+      commit('setBoss', true);
+      dispatch('upgradeBoss');
+    },
+    upgradeBoss({ commit, rootState }) {
+      const boss = { ...FallenBarbarian };
+      const shuffledUpgrades = shuffle(boss.upgrades);
+      shuffledUpgrades.forEach((upgrade) => {
+        if (rootState.bossCP >= upgrade.cost) {
+          const panelIndex = boss.panels.findIndex(panel => panel[0].title === upgrade.base);
+          boss.panels.splice(panelIndex, 1, upgrade.new);
+          for (let i = 0; i < upgrade.cost; i++) {
+            commit('decrementState', 'bossCP');
+          }
+        } else {
+          commit('incrementState', 'bossCP');
+        }
+      });
+      commit('addMonster', boss);
+      commit('setActiveMonster', boss);
     },
   },
 };

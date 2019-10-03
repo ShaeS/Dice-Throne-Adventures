@@ -37,18 +37,25 @@
     </div>
 
     <div class="sidebar__line">
-      <button @click="lootModal = true" class="button button--large">Loot Board</button>
+      <button @click="lootModal = true" class="button button--large">Loot</button>
     </div>
 
     <div class="sidebar__line new-game">
-      <button @click="confirmModal = true" class="button button--large">New Game</button>
+      <button @click="confirmModal = true;settingBoss = false" class="button button--large">New Game</button>
     </div>
 
     <GameModal v-if="confirmModal" @close="confirmModal = false" size="tiny">
       <GameConfirm
+        v-if="!settingBoss"
         @close="confirmModal = false"
         @confirm="newGame();confirmModal = false"
         text="Are you sure you want to start a new game?"
+      />
+      <GameConfirm
+        v-if="settingBoss"
+        @close="confirmModal = false"
+        @confirm="spawnMonster(4);confirmModal = false"
+        text="Are you sure you want to spawn the boss?"
       />
     </GameModal>
 
@@ -59,17 +66,24 @@
     <GameModal v-if="spawnModal" @close="spawnModal = false" size="tiny">
       <div class="monster-select">
         <EnemyIcon
-        v-for="level in 3"
-        :key="level"
-        @click.native="spawnMonster(level)"
-        class="monster-select__icon"
-        :type="level"
-      />
+          v-for="level in 3"
+          :key="level"
+          @click.native="spawnMonster(level)"
+          class="monster-select__icon"
+          :type="level"
+        />
+        <EnemyIcon
+          :key="4"
+          @click.native="confirmModal = true;settingBoss = true"
+          class="monster-select__icon"
+          :type="4"
+        />
       </div>
     </GameModal>
 
-    <GameModal v-if="monsterModal" @close="closeMonster" size="medium">
-      <GameMonster @close="closeMonster" />
+    <GameModal v-if="monsterModal" @close="closeMonster" :size="boss ? '' : 'medium'">
+      <GameMonster v-if="!boss" @close="closeMonster" />
+      <GameBoss v-else @close="closeMonster" />
     </GameModal>
   </div>
 </template>
@@ -86,6 +100,7 @@ import SettingsIcon from '../icons/SettingsIcon.vue';
 import GameModal from './GameModal.vue';
 import GameConfirm from './GameConfirm.vue';
 import GameMonster from './GameMonster.vue';
+import GameBoss from './GameBoss.vue';
 import LootBoard from './LootBoard.vue';
 
 export default {
@@ -99,26 +114,38 @@ export default {
     GameModal,
     GameConfirm,
     GameMonster,
+    GameBoss,
     LootBoard,
   },
   data() {
     return {
-      open: false,
+      open: true,
       spawnModal: false,
       monsterModal: false,
       confirmModal: false,
       lootModal: false,
+      settingBoss: false,
     };
   },
   computed: {
     ...mapState(['gold', 'bossCP']),
+    boss() {
+      return this.$store.state.monsters.boss;
+    },
     monsters() {
       return this.$store.state.monsters.monsters;
+    },
+    activeMonster() {
+      return this.$store.state.monsters.activeMonster;
     },
   },
   methods: {
     spawnMonster(level) {
-      this.drawMonster(level);
+      if (level === 4) {
+        this.spawnBoss();
+      } else {
+        this.drawMonster(level);
+      }
       this.spawnModal = false;
       this.monsterModal = true;
     },
@@ -131,7 +158,7 @@ export default {
       this.unsetActiveMonster();
     },
     ...mapMutations(['decrementState', 'incrementState', 'setActiveMonster', 'unsetActiveMonster']),
-    ...mapActions(['drawMonster', 'nextPlayer', 'newGame']),
+    ...mapActions(['drawMonster', 'nextPlayer', 'newGame', 'spawnBoss']),
   },
 };
 </script>
