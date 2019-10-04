@@ -68,7 +68,12 @@ export default {
       const shuffledUpgrades = shuffle(boss.upgrades);
       shuffledUpgrades.forEach((upgrade) => {
         if (rootState.bossCP >= upgrade.cost) {
-          const panelIndex = boss.panels.findIndex(panel => panel[0].title === upgrade.base);
+          const panelIndex = boss.panels.findIndex((panel) => {
+            if (panel[0].title.replace(' II', '').replace(' III', '') === upgrade.base) {
+              return panel;
+            }
+            return null;
+          });
           boss.panels.splice(panelIndex, 1, upgrade.new);
           for (let i = 0; i < upgrade.cost; i++) {
             commit('decrementState', 'bossCP');
